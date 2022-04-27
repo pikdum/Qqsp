@@ -1,0 +1,27 @@
+app-id: io.github.pikdum.Qqsp
+runtime: org.kde.Platform
+runtime-version: "5.12"
+sdk: org.kde.Sdk
+command: Qqsp
+finish-args:
+  - "--share=ipc"
+  - "--socket=x11"
+  - "--socket=wayland"
+  - "--socket=pulseaudio"
+  - "--filesystem=home"
+  - "--device=dri"
+modules:
+  - name: Qqsp
+    buildsystem: qmake
+    builddir: true
+    no-make-install: true
+    post-install:
+      - mkdir -p /app/bin/ /app/share/applications/ /app/share/icons/hicolor/scalable/apps/
+      - cp Qqsp /app/bin/Qqsp
+      - cp ../Qqsp.desktop /app/share/applications/io.github.pikdum.Qqsp.desktop
+      - cp ../icons/qsp-logo-vector.svg /app/share/icons/hicolor/scalable/apps/io.github.pikdum.Qqsp.svg
+    sources:
+      # - type: git
+      #   url: https://gitlab.com/Sonnix1/Qqsp.git
+      - type: dir
+        path: .
